@@ -1,6 +1,4 @@
 import 'package:app/models/topic.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
 
 import '../models/photo.dart';
@@ -25,7 +23,7 @@ class _TopicPageState extends State<TopicPage> {
   }
 
   getPhotos() async {
-    photos = await RemoteService().getPhotos('my-childhood');
+    photos = await RemoteService().getPhotos(widget.topic.id);
     if (photos != null) {
       setState(() {
         isLoaded = true;
@@ -36,7 +34,7 @@ class _TopicPageState extends State<TopicPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: const Text(Widget.topic.name)),
+        appBar: AppBar(title: Text(widget.topic.name)),
         body: Visibility(
           visible: isLoaded,
           replacement: const Center(child: CircularProgressIndicator()),

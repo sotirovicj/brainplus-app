@@ -1,6 +1,5 @@
 import 'package:app/models/topic.dart';
 import 'package:app/services/remote_services.dart';
-import 'package:app/views/food.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -41,6 +40,7 @@ class _HomePageState extends State<HomePage> {
               itemBuilder: (context, index) {
                 return ElevatedButton(
                     onPressed: () {
+                      RemoteService().incrementCounter('${topics![index].id}');
                       Navigator.pushNamed(context, '/${topics![index].id}');
                     },
                     child: Text(topics![index].name));

@@ -1,7 +1,5 @@
-import 'package:app/views/art.dart';
-import 'package:app/views/food.dart';
-import 'package:app/views/householdItems.dart';
-import 'package:app/views/my_childhood_page.dart';
+import 'package:app/models/topic.dart';
+import 'package:app/views/topic_page.dart';
 import 'package:flutter/material.dart';
 import 'views/home_page.dart';
 
@@ -15,12 +13,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Brain+',
       routes: {
-        '/food': (context) => const Food(),
-        '/art': (context) => const Art(),
-        '/my-childhood': (context) => const MyChildhood(),
-        '/household-items': (context) => const HouseholdItems(),
+        '/food': (context) => TopicPage(topic: Topic(id: 'food', name: 'Food')),
+        '/art': (context) => TopicPage(topic: Topic(id: 'art', name: 'Art')),
+        '/my-childhood': (context) =>
+            TopicPage(topic: Topic(id: 'my-childhood', name: 'My Childhood')),
+        '/household-items': (context) => TopicPage(
+            topic: Topic(id: 'household-items', name: 'Household Items')),
       },
       theme: ThemeData(
         primarySwatch: Colors.blue,

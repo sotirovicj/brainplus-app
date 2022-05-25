@@ -5,26 +5,38 @@ import 'package:http/http.dart' as http;
 class RemoteService {
   Future<List<Topic>> getTopics() async {
     var client = http.Client();
-    // var uri = Uri.parse('https://brainplus-api.herokuapp.com/topics');
-    var uri = Uri.parse('http://localhost:3000/topics');
+    var uri = Uri.parse('https://brainplus-api.herokuapp.com/topics');
     var response = await client.get(uri);
     if (response.statusCode == 200) {
       var json = response.body;
       return topicFromJson(json);
     }
-    throw ''; // TODO
+    throw 'Something went wrong!';
   }
 
   Future<List<Photo>> getPhotos(topicId) async {
     var client = http.Client();
-    var uri = Uri.parse('http://localhost:3000/topics/$topicId/images');
+    var uri =
+        Uri.parse('https://brainplus-api.herokuapp.com/topics/$topicId/images');
     var response = await client.get(uri);
     if (response.statusCode == 200) {
       var json = response.body;
       return photoFromJson(json);
     }
-    throw ''; // TODO
+    throw 'Something went wrong!';
   }
 
-  // TODO add register click
+  Future<String> incrementCounter(String counterId) async {
+    var client = http.Client();
+    var uri =
+        Uri.parse('https://brainplus-api.herokuapp.com/counters/$counterId');
+    var response = await client.post(
+      uri,
+    );
+    if (response.statusCode == 200) {
+      return 'OK';
+    } else {
+      throw 'Something went wrong!';
+    }
+  }
 }
